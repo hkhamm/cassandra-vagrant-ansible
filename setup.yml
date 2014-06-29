@@ -1,10 +1,9 @@
 ---
-- hosts: all
-  sudo: yes
-  tasks:
-
   # Install Oracle Java 7
-  - include: tasks/install_java.yml
+  - include: playbooks/install_java.yml
 
   # Install Datastax Cassandra 2.0
-  - include: tasks/install_cassandra.yml
+  - include: playbooks/install_cassandra.yml
+
+  # Start Cassandra
+  - include: playbooks/start_cassandra.yml

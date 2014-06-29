@@ -1,0 +1,8 @@
+---
+# Start Cassandra
+
+- hosts: all
+  remote_user: cassandra
+  tasks:
+  - name: Start Cassandra
+    service: name=cassandra state=started
