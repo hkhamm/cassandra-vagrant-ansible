@@ -1,0 +1,20 @@
+---
+# Install Datastax Cassandra 2.0
+
+- name: Add the DataStax Community repository
+  apt_repository: repo='deb http://debian.datastax.com/community stable main'
+
+- name: Add the DataStax repository key to the aptitude trusted keys.
+  shell: curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
+
+- name: Update APT package cache
+  apt: update_cache=yes
+
+- name: Install Datastax Cassandra 2.0
+  apt: pkg=dsc20 state=latest install_recommends=yes
+
+- name: Set Cassandra user resource limits
+  copy: src=../files/cassandra.conf dest=/etc/security/limits.d/cassandra.conf
+
+- name: Disable swap
+  shell: swapoff --all
