@@ -2,7 +2,8 @@
 # Start Cassandra
 
 - hosts: all
-  remote_user: cassandra
   tasks:
+  - name: Switch to user cassandra
+    shell: sudo -su cassandra
   - name: Start Cassandra
     service: name=cassandra state=started
