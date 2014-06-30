@@ -1,9 +1,0 @@
----
-# Start Cassandra
-
-- hosts: all
-  tasks:
-  - name: Start Cassandra
-    service: name=cassandra state=started
-    user: cassandra
-    sudo: yes
