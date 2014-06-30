@@ -6,6 +6,3 @@
 
   # Install Datastax Cassandra 2.0
   - include: tasks/install_cassandra.yml
-
-  # Start Cassandra
-  # - include: tasks/start_cassandra.yml 
