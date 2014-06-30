@@ -5,7 +5,7 @@
 - name: Adding Java repository
   apt_repository: repo='ppa:webupd8team/java' update_cache=yes state=present
 
-- name: Auto accepting license for Java
+- name: Auto accepting Java license
   shell: echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
   
 - name: Installing Oracle Java 7 and support libs
