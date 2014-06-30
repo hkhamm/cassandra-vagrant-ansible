@@ -3,7 +3,7 @@
 
 - hosts: all
   tasks:
-  - name: Switch to user cassandra
-    shell: sudo -su cassandra
   - name: Start Cassandra
     service: name=cassandra state=started
+    user: cassandra
+    sudo: yes

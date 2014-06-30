@@ -10,6 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.box_url = "https://vagrantcloud.com/ubuntu/trusty64"
     # Install Oracle Java 7 and Datastax Cassandra 2.0
     config.vm.provision "ansible" do |ansible|
-        ansible.playbook = "setup.yml"
+        ansible.playbook = "main.yml"
+        ansible.sudo = true
     end
 end

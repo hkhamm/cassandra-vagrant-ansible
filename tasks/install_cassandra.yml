@@ -1,0 +1,44 @@
+---
+# Install Datastax Cassandra 2.0
+- name: Adding the DataStax Community repository
+  apt_repository: repo='deb http://debian.datastax.com/community stable main'
+
+- name: Adding the DataStax repository key to the aptitude trusted keys.
+  shell: curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
+
+- name: Updating APT package cache
+  apt: update_cache=yes
+
+# Starting Cassandra as a service fails, see below (Disabling ulimit...)
+- name: Installing Datastax Cassandra 2.0
+  apt: pkg=dsc20 state=latest install_recommends=yes
+
+# Replaces cassandra.conf
+- name: Setting Cassandra user resource limits
+  copy: src=cassandra.conf dest=/etc/security/limits.d/cassandra.conf
+
+# Adds limit to sysctl.conf
+- name: Setting max map count
+  shell: echo 'vm.max_map_count = 131072' > /etc/sysctl.conf
+
+- name: Reloading sysctl
+  shell: sysctl -p
+
+- name: Disabling swap
+  shell: swapoff --all
+
+# Changes heap size in cassandra-env.sh
+- name: Setting Cassandra heap size
+  copy: src=cassandra-env.sh dest=/etc/cassandra/cassadra-env.sh
+
+# Replaces cassandra.yaml
+- name: Updating cassandra.yaml
+  copy: src=cassandra.yaml dest=/etc/cassandra/cassadra.yaml
+
+# Comments out lines in the cassandra startup script that attempt to set ulimits
+# These lines prevent root from starting Cassandra as a service
+- name: Disabling ulimit setting in cassandra startup script
+  copy: src=cassandra dest=/etc/init.d/cassandra
+
+- name: Starting Cassandra
+  service: name=cassandra state=restarted

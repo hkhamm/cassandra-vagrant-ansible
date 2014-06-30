@@ -1,6 +1,0 @@
----
-  # Install Oracle Java 7
-  - include: playbooks/install_java.yml
-
-  # Install Datastax Cassandra 2.0
-  - include: playbooks/install_cassandra.yml
