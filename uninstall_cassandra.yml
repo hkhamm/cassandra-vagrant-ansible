@@ -1,0 +1,23 @@
+---
+- name: Uninstall Cassandra
+  user: ubuntu
+  sudo: yes
+  hosts: cassandra
+  tasks:
+    - name: Remove dsc20
+      shell: apt-get purge dsc20 -y
+
+    - name: Remove Cassandra
+      shell: apt-get purge cassandra -y
+
+    - name: Remove Cassandra dependences
+      shell: apt-get autoremove -y
+
+    - name: Remove /etc/cassandra
+      shell: rm -rf /etc/cassandra
+
+    - name: Remove /var/log/cassandra
+      shell: rm -rf /var/log/cassandra
+
+    - name: Remove /var/lib/cassandra
+      shell: rm -rf /var/lib/cassandra

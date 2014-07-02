@@ -224,7 +224,7 @@ seed_provider:
       parameters:
           # seeds is actually a comma-delimited list of addresses.
           # Ex: "<ip1>,<ip2>,<ip3>"
-          - seeds: "127.0.0.1"
+          - seeds: "10.0.0.232"
 
 # For workloads with more data than can fit in memory, Cassandra's
 # bottleneck will be reads that need to fetch data from
@@ -296,13 +296,13 @@ ssl_storage_port: 7001
 # Setting this to 0.0.0.0 is always wrong.
 #
 # For an AWS S2 instance, set listen_address to the private IP address.
-listen_address: localhost
+listen_address: 10.0.0.233
 
 # Address to broadcast to other Cassandra nodes
 # Leaving this blank will set it to the same value as listen_address
 #
-# For an AWS S2 instance, set broadcast_address to the public IP address.
-# broadcast_address: 1.2.3.4
+# For an AWS S2 instance, set broadcast_address to the public IP address
+broadcast_address: 54.191.64.165
 
 # Internode authentication backend, implementing IInternodeAuthenticator;
 # used to allow/disallow connections from peer nodes.
@@ -338,7 +338,7 @@ start_rpc: true
 # that rely on node auto-discovery.
 #
 # For an AWS S2 instance, set rpc_address to 0.0.0.0 address.
-rpc_address: localhost
+rpc_address: 0.0.0.0
 # port for Thrift to listen for clients on
 rpc_port: 9160
 
@@ -574,7 +574,7 @@ cross_node_timeout: false
 # of the snitch, which will be assumed to be on your classpath.
 #
 # For AWS S2 instance, set endpoint_snitch to Ec2MultiRegionSnitch.
-endpoint_snitch: SimpleSnitch
+endpoint_snitch: Ec2MultiRegionSnitch
 
 # controls how often to perform the more expensive part of host score
 # calculation

@@ -1,0 +1,11 @@
+---
+- name: Install and setup Cassandra and all support software
+  user: ubuntu
+  sudo: yes
+  hosts: ec2-54-191-60-148.us-west-2.compute.amazonaws.com
+  tasks:
+    # Install Oracle Java 7
+    - include: tasks/install_java.yml
+
+    # Install Datastax Cassandra 2.0
+    - include: tasks/install_cassandra.yml

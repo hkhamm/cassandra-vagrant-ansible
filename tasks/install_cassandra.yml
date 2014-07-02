@@ -27,13 +27,21 @@
 - name: Disabling swap
   shell: swapoff --all
 
+# Remove swap file entries from from /etc/fstab
+- name: Removing all swap file entries
+  copy: src=fstab dest=/etc/fstab
+
 # Changes heap size in cassandra-env.sh
 - name: Setting Cassandra heap size
-  copy: src=cassandra-env.sh dest=/etc/cassandra/cassadra-env.sh
+  copy: src=cassandra-env.sh dest=/etc/cassandra/cassandra-env.sh
 
-# Replaces cassandra.yaml
-- name: Updating cassandra.yaml
-  copy: src=cassandra.yaml dest=/etc/cassandra/cassadra.yaml
+# # Set the readahead to 128 (AWS)
+# - name: Setting readahead to 128
+#   shell: sudo blockdev --setra 128 /dev/xvda*
+
+# # Replaces cassandra.yaml
+# - name: Updating cassandra.yaml
+#   copy: src=cassandra.yaml dest=/etc/cassandra/cassandra.yaml
 
 # Comments out lines in the cassandra startup script that attempt to set ulimits
 # These lines prevent root from starting Cassandra as a service
@@ -41,4 +49,4 @@
   copy: src=cassandra dest=/etc/init.d/cassandra
 
 - name: Starting Cassandra
-  service: name=cassandra state=restarted
+  shell: service cassandra start

@@ -1,0 +1,12 @@
+---
+- name: Install and setup Cassandra and all support software
+  user: ubuntu
+  sudo: yes
+  hosts: ec2-54-191-64-165.us-west-2.compute.amazonaws.com
+  tasks:
+    # Replaces cassandra.yaml
+    - name: Updating cassandra.yaml
+      copy: src=files/cassandra.yaml dest=/etc/cassandra/cassandra.yaml
+
+    - name: Restarting Cassandra
+      service: name=cassandra state=restarted
