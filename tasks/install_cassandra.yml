@@ -27,9 +27,9 @@
 - name: Disabling swap
   shell: swapoff --all
 
-# Remove swap file entries from from /etc/fstab
-- name: Removing all swap file entries
-  copy: src=fstab dest=/etc/fstab
+# # Remove swap file entries from from /etc/fstab
+# - name: Removing all swap file entries
+#   copy: src=fstab dest=/etc/fstab
 
 # Changes heap size in cassandra-env.sh
 - name: Setting Cassandra heap size
